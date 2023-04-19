@@ -23,7 +23,7 @@ public class TestCaseRepositoryNative {
     @Transactional
     public void removeColumn(String tableName, String columnName){
 
-        String query = "ALTER TABLE `" + tableName + "` DROP COLUMN `" + columnName;
+        String query = "ALTER TABLE `" + tableName + "` DROP COLUMN `" + columnName + "`";
 
         entityManager.createNativeQuery(query).executeUpdate();
     }

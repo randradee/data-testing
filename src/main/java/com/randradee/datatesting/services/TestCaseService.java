@@ -30,7 +30,6 @@ public class TestCaseService {
 
     public void removeColumn(String columnName) {
         String tableName = "TB_TEST_CASE";
-        String columnType = "VARCHAR(255)";
 
         testCaseRepositoryNative.removeColumn(tableName, columnName);
     }
