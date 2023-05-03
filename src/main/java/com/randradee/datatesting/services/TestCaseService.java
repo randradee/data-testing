@@ -1,7 +1,7 @@
 package com.randradee.datatesting.services;
 
 import com.randradee.datatesting.entities.TestCase;
-import com.randradee.datatesting.repositories.TestCaseRepository;
+import com.randradee.datatesting.repositories.TestCaseRepositoryImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,8 @@ import java.util.UUID;
 public class TestCaseService {
 
     @Autowired
-    TestCaseRepository testCaseRepository;
+    TestCaseRepositoryImpl testCaseRepository;
+
 
     @Transactional
     public TestCase save(TestCase testCaseModel) {
@@ -25,16 +26,14 @@ public class TestCaseService {
         return testCaseRepository.findAll();
     }
 
-    @Transactional
-    public Integer addColumn(String columnName) {
+    public void addColumn(String columnName) {
         String columnType = "VARCHAR(255)";
-        return testCaseRepository.addColumn(columnName);
+        testCaseRepository.addColumnToTable("TB_TEST_CASE", columnName, columnType);
     }
 
-//    @Transactional
-//    public void removeColumn(String columnName) {
-//        testCaseRepository.removeColumn(columnName);
-//    }
+    public void removeColumn(String columnName) {
+        testCaseRepository.removeColumnFromTable("TB_TEST_CASE", columnName);
+    }
 
     public Optional findById(UUID id) {
         return testCaseRepository.findById(id);

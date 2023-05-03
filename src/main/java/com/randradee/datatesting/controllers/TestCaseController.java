@@ -63,8 +63,9 @@ public class TestCaseController {
     }
 
     @PostMapping("/add-column")
-    public ResponseEntity<Integer> addColumnToTestCase(@RequestBody @Valid AlterColumnDTO alterColumnDTO){
-        return ResponseEntity.status(HttpStatus.OK).body(testCaseService.addColumn(alterColumnDTO.getName()));
+    public ResponseEntity<String> addColumnToTestCase(@RequestBody @Valid AlterColumnDTO alterColumnDTO){
+        testCaseService.addColumn(alterColumnDTO.getName());
+        return ResponseEntity.status(HttpStatus.OK).body("dale");
     }
 
 //    @PutMapping("/add-column")
