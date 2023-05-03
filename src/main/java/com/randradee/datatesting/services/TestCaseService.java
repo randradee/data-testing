@@ -1,8 +1,7 @@
 package com.randradee.datatesting.services;
 
-import com.randradee.datatesting.models.TestCaseModel;
+import com.randradee.datatesting.entities.TestCase;
 import com.randradee.datatesting.repositories.TestCaseRepository;
-import com.randradee.datatesting.repositories.TestCaseRepositoryNative;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,34 +14,27 @@ import java.util.UUID;
 public class TestCaseService {
 
     @Autowired
-    TestCaseRepositoryNative testCaseRepositoryNative;
-
-    @Autowired
     TestCaseRepository testCaseRepository;
 
     @Transactional
-    public TestCaseModel save(TestCaseModel testCaseModel) {
+    public TestCase save(TestCase testCaseModel) {
         return testCaseRepository.save(testCaseModel);
     }
 
-    public List<TestCaseModel> findAll(){
+    public List<TestCase> findAll(){
         return testCaseRepository.findAll();
     }
 
     @Transactional
-    public void addColumn(String columnName) {
-        String tableName = "TB_TEST_CASE";
+    public Integer addColumn(String columnName) {
         String columnType = "VARCHAR(255)";
-
-        testCaseRepositoryNative.addColumn(tableName, columnName, columnType);
+        return testCaseRepository.addColumn(columnName);
     }
 
-    @Transactional
-    public void removeColumn(String columnName) {
-        String tableName = "TB_TEST_CASE";
-
-        testCaseRepositoryNative.removeColumn(tableName, columnName);
-    }
+//    @Transactional
+//    public void removeColumn(String columnName) {
+//        testCaseRepository.removeColumn(columnName);
+//    }
 
     public Optional findById(UUID id) {
         return testCaseRepository.findById(id);
